@@ -1,0 +1,28 @@
+# Environment variables - NEVER commit these
+.env
+.env.local
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Test artifacts
+test-output/
+
+# Large PDF (add back if you want to include it in the repo)
+niaho-standards.pdf
