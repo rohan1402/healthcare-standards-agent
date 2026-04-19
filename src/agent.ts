@@ -18,6 +18,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 import * as readline from "readline";
 import dotenv from "dotenv";
+import path from "path";
+
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 import {
   searchStandards,
@@ -26,7 +29,7 @@ import {
   closeDb,
 } from "./tools.js";
 
-dotenv.config();
+// dotenv already configured above with explicit path
 
 // ─── Config ────────────────────────────────────────────────────────────────────
 

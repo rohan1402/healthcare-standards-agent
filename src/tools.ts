@@ -12,8 +12,10 @@
 
 import { MongoClient, Db } from "mongodb";
 import dotenv from "dotenv";
+import path from "path";
+import { getVoyageEmbeddingsUrl } from "./voyage-embeddings";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 // ─── Config ────────────────────────────────────────────────────────────────────
 
@@ -78,7 +80,7 @@ export async function closeDb(): Promise<void> {
 export async function generateQueryEmbedding(query: string): Promise<number[]> {
   if (!VOYAGE_API_KEY) throw new Error("VOYAGE_API_KEY is not set in .env");
 
-  const response = await fetch("https://api.voyageai.com/v1/embeddings", {
+  const response = await fetch(getVoyageEmbeddingsUrl(), {
     method: "POST",
     headers: {
       Authorization: `Bearer ${VOYAGE_API_KEY}`,
