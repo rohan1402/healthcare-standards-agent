@@ -62,7 +62,7 @@ User Query
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/<your-username>/healthcare-standards-agent.git
+git clone https://github.com/rohan1402/healthcare-standards-agent.git
 cd healthcare-standards-agent
 npm install
 ```
@@ -227,6 +227,8 @@ MongoDB's HNSW approximate nearest neighbor search works better with a broader c
 
 ### Chunk strategy
 Chunks are split at NIAHO chapter boundaries (e.g., `QM.1`, `IC.3`) to preserve semantic coherence. Oversized chunks are sub-split by paragraph, with sub-chapter IDs like `QM.1.1`. This preserves the chapter hierarchy for exact lookups while keeping embedding quality high.
+
+The chunker automatically skips table-of-contents entries (short chunks containing dot leaders `......` ending in a page number) to avoid indexing TOC references instead of actual chapter content. Some chapters (e.g., `IC.3`) appear only as TOC entries in the PDF with the actual body content embedded inline within a parent section — in these cases the agent falls back to semantic search and informs the user.
 
 ---
 

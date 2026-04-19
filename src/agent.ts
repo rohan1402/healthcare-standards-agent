@@ -27,7 +27,7 @@ import {
   getStandardByChapter,
   listSections,
   closeDb,
-} from "./tools.js";
+} from "./tools";
 
 // dotenv already configured above with explicit path
 

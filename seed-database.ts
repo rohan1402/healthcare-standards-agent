@@ -200,6 +200,18 @@ async function extractChunks(
 
     if (!chunkText || chunkText.length < 50) continue;
 
+    // Skip TOC entries: short chunks that are just a heading + page number dots
+    // Classic TOC signature: body under 200 chars AND contains dot leaders (.......)
+    const isTocEntry =
+      chunkText.length < 200 &&
+      /\.{5,}/.test(chunkText) && // contains "....." dot leaders
+      /\d+\s*$/.test(chunkText);  // ends with a page number
+
+    if (isTocEntry) {
+      console.log(`  ⏭ Skipping TOC entry: ${seg.chapter}`);
+      continue;
+    }
+
     // If the chunk is too large, sub-split by paragraphs
     if (estimateTokens(chunkText) > MAX_CHUNK_TOKENS) {
       const subParagraphs = chunkText
